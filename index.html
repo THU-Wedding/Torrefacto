@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме — Редактор для Торрефакто</title>
+    
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Подключение иконок -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F9F6F0',
+                        coffee: {
+                            light: '#D4A373',
+                            DEFAULT: '#6F4E37',
+                            dark: '#3E2723',
+                        },
+                        ink: '#1A1A1A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Плавная прокрутка */
+        html { scroll-behavior: smooth; }
+        
+        body { background-color: #F9F6F0; color: #1A1A1A; overflow-x: hidden; }
+
+        /* Анимации появления */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Кастомный скроллбар */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F9F6F0; }
+        ::-webkit-scrollbar-thumb { background: #6F4E37; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3E2723; }
+
+        /* Эффект наведения на карточки */
+        .hover-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(111, 78, 55, 0.15);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-coffee selection:text-cream">
+
+    <nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-cream/90 border-b border-coffee/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i data-lucide="coffee" class="w-6 h-6 text-coffee"></i>
+                    <span class="font-serif font-bold text-xl tracking-wide text-ink">Кандидат</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#approach" class="hover:text-coffee transition-colors text-sm font-medium">Подход</a>
+                        <a href="#expertise" class="hover:text-coffee transition-colors text-sm font-medium">Экспертиза</a>
+                        <a href="#portfolio" class="hover:text-coffee transition-colors text-sm font-medium">Портфолио</a>
+                        <a href="#contact" class="bg-coffee hover:bg-coffee-dark text-cream px-5 py-2.5 rounded-full transition-colors text-sm font-medium">Связаться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- Фоновое изображение (Кофейная эстетика) -->
+            <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=80" alt="Coffee background" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-b from-cream/80 via-cream to-cream"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 border border-coffee/20 text-coffee-dark text-sm font-medium mb-8 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Специально для команды Торрефакто
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-ink leading-tight mb-6">
+                Не просто проверяю тексты. <br>
+                <span class="italic text-coffee">Строю систему смыслов.</span>
+            </h1>
+            
+            <p class="mt-4 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+                Привет, Торрефакто. Я редактор, который понимает архитектуру контента, алгоритмы Reels и то, почему кенийский кофе лучше раскрывается в фильтре.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-ink hover:bg-gray-800 text-cream rounded-full font-medium transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                    Смотреть портфолио <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#approach" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-gray-50 border border-gray-200 text-ink rounded-full font-medium transition-all flex items-center justify-center gap-2">
+                    Мой подход
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="approach" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-ink mb-4">Почему я — тот самый редактор</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Я закрываю сразу несколько болей вашей вакансии: от вычитки рассылок до продюсирования визуального контента.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Карточка 1 -->
+                <div class="p-8 rounded-2xl bg-cream border border-coffee/10 hover-card reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-full bg-coffee/10 flex items-center justify-center mb-6 text-coffee">
+                        <i data-lucide="git-merge" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3 text-ink">Редактура как процесс</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Я не жду музу. Я выстраиваю пайплайны. Гарантирую единый Tone of Voice (голос бренда) на всех площадках: от карточки товара до надписи на коробке с заказом. Срывы дедлайнов исключены.
+                    </p>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="p-8 rounded-2xl bg-cream border border-coffee/10 hover-card reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 rounded-full bg-coffee/10 flex items-center justify-center mb-6 text-coffee">
+                        <i data-lucide="video" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3 text-ink">От текста к Reels</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        У меня огромный бэкграунд в видеопродакшене. Я не просто "редактирую сценарии", я мыслю раскадровками, прописываю хуки с 1-й секунды и ставлю жесткие ТЗ монтажерам и дизайнерам.
+                    </p>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="p-8 rounded-2xl bg-cream border border-coffee/10 hover-card reveal" style="transition-delay: 300ms;">
+                    <div class="w-14 h-14 rounded-full bg-coffee/10 flex items-center justify-center mb-6 text-coffee">
+                        <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3 text-ink">Опора на цифры</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        Текст должен работать. Я анализирую глубину просмотра, кликабельность и дочитываемость блога. Если статья не работает — я меняю структуру, а не переставляю запятые.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="py-24 bg-ink text-cream">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6">Как я решаю <span class="italic text-coffee-light">ваши задачи</span></h2>
+                    <p class="text-gray-400 mb-8 text-lg font-light leading-relaxed">
+                        Я внимательно изучил вакансию. Вот как мой опыт ложится на ваши ежедневные процессы.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-coffee-light flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Карточки товаров</h4>
+                                <p class="text-gray-400 text-sm">Избавляюсь от воды. Вместо «уникальный бленд с потрясающим вкусом» пишу «Плотный эспрессо-бленд: ноты темного шоколада, жареного фундука и легкая кислотность спелой вишни».</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-coffee-light flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Сценарии и визуал</h4>
+                                <p class="text-gray-400 text-sm">Редактируя сценарий, я сразу указываю, что происходит в кадре (B-roll), какой нужен звук и как удержать внимание зрителя. Мои ТЗ не оставляют вопросов.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-coffee-light flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Печатная продукция</h4>
+                                <p class="text-gray-400 text-sm">Учитываю физику чтения. Текст на вкладыше или коробке читают иначе, чем на экране. Выверяю иерархию типографики вместе с дизайнером.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative reveal h-full min-h-[400px] rounded-2xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=800&q=80" alt="Content Creation" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-ink/40 group-hover:bg-ink/20 transition-colors duration-500"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-cream">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-ink mb-4">Матрица форматов (Портфолио)</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Нажмите на карточку, чтобы увидеть, как я решаю конкретные продуктовые задачи.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Проект 1 -->
+                <div onclick="openModal('modal-1')" class="group cursor-pointer rounded-2xl bg-white p-1 overflow-hidden hover-card reveal">
+                    <div class="h-48 bg-gray-100 rounded-xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white font-serif font-bold text-xl">Сценарии Reels / Shorts</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4">Разработка динамичных сценариев для коротких видео с интеграцией продуктовых смыслов и ТЗ для видеографа.</p>
+                        <span class="text-coffee font-medium text-sm flex items-center gap-1 group-hover:translate-x-2 transition-transform">Смотреть кейс <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Проект 2 -->
+                <div onclick="openModal('modal-2')" class="group cursor-pointer rounded-2xl bg-white p-1 overflow-hidden hover-card reveal" style="transition-delay: 100ms;">
+                    <div class="h-48 bg-gray-100 rounded-xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white font-serif font-bold text-xl">Экспертные статьи & SEO</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4">Структурированные, глубокие статьи для блога без канцелярита. От архитектуры заголовков до дочитываемости.</p>
+                        <span class="text-coffee font-medium text-sm flex items-center gap-1 group-hover:translate-x-2 transition-transform">Смотреть кейс <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Проект 3 -->
+                <div onclick="openModal('modal-3')" class="group cursor-pointer rounded-2xl bg-white p-1 overflow-hidden hover-card reveal" style="transition-delay: 200ms;">
+                    <div class="h-48 bg-gray-100 rounded-xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white font-serif font-bold text-xl">Карточки товаров (E-com)</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4">Вкусные, точные описания товарных позиций. Перевод сложных характеристик на язык пользы для клиента.</p>
+                        <span class="text-coffee font-medium text-sm flex items-center gap-1 group-hover:translate-x-2 transition-transform">Смотреть кейс <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+                </div>
+
+                <!-- Проект 4 -->
+                <div onclick="openModal('modal-4')" class="group cursor-pointer rounded-2xl bg-white p-1 overflow-hidden hover-card reveal" style="transition-delay: 300ms;">
+                    <div class="h-48 bg-gray-100 rounded-xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white font-serif font-bold text-xl">Email-рассылки & КП</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4">Продающие письма и коммерческие предложения (B2B/B2C). Работа с заголовками для повышения Open Rate.</p>
+                        <span class="text-coffee font-medium text-sm flex items-center gap-1 group-hover:translate-x-2 transition-transform">Смотреть кейс <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="bg-cream rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 border border-coffee/10 reveal">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80" alt="Coffee pouring" class="rounded-2xl shadow-xl w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <i data-lucide="heart" class="w-8 h-8 text-coffee mb-6"></i>
+                    <h2 class="text-3xl font-serif font-bold text-ink mb-6">Кофе, чай и Домодедово</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Я глубоко уважаю продукт, который создает Торрефакто. 14 лет на рынке и собственное производство — это признак огромной преданности своему делу.
+                    </p>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Мне не нужно объяснять разницу между арабикой и робустой, мытой и натуральной обработкой. Я готов погружаться в детали вашей обжарки и с удовольствием приеду на производство в Шишкино, чтобы познакомиться с командой, увидеть процессы своими глазами и создавать по-настоящему аутентичный контент.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-ink text-center">
+        <div class="max-w-3xl mx-auto px-6 reveal">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-cream mb-6">Готов к тестовому заданию</h2>
+            <p class="text-gray-400 mb-10 text-lg">
+                Давайте проведем короткий созвон. Я покажу, как именно смогу оптимизировать ваши контент-процессы и поднять качество текстов и видео уже в первый месяц работы.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://t.me/your_telegram" target="_blank" class="px-8 py-4 bg-coffee hover:bg-coffee-light text-cream rounded-full font-medium transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-5 h-5"></i> Написать в Telegram
+                </a>
+                <!-- Заглушка для резюме -->
+                <button onclick="document.getElementById('cv-toast').classList.remove('translate-y-[150%]'); setTimeout(() => document.getElementById('cv-toast').classList.add('translate-y-[150%]'), 3000);" class="px-8 py-4 bg-transparent border border-gray-600 hover:border-cream text-cream rounded-full font-medium transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-5 h-5"></i> Скачать полное резюме
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#111] py-8 border-t border-gray-800 text-center">
+        <p class="text-gray-600 text-sm">Собрано специально для отклика в Торрефакто • 2024</p>
+    </footer>
+
+    <!-- Модальные окна (Скрыты по умолчанию) -->
+    
+    <!-- Modal 1 -->
+    <div id="modal-1" class="fixed inset-0 z-[100] bg-ink/90 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-cream rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative transform scale-95 transition-transform duration-300 shadow-2xl">
+            <button onclick="closeModal('modal-1')" class="absolute top-6 right-6 text-gray-500 hover:text-ink"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h3 class="text-3xl font-serif font-bold mb-4 pr-10">Сценарии для Reels & ТЗ</h3>
+            <div class="prose prose-coffee max-w-none text-gray-700">
+                <p><strong>Задача:</strong> Разработать вовлекающий сценарий для короткого ролика, демонстрирующего процесс заваривания в воронке.</p>
+                <div class="bg-white p-6 rounded-xl border border-gray-200 my-6">
+                    <h4 class="font-bold mb-3">Пример моего ТЗ и сценария:</h4>
+                    <table class="w-full text-sm text-left border-collapse">
+                        <tr class="border-b"><th class="py-2 w-1/3">Тайминг / Визуал (B-roll)</th><th class="py-2">Текст (Голос за кадром) / Титры</th></tr>
+                        <tr class="border-b"><td class="py-3 text-gray-600">0:00-0:02. Крупный план: горячая вода медленно льется на свежемолотый кофе. Густая пена (блум). Динамичный зум.</td><td class="py-3"><strong>Титра:</strong> Почему ваш кофе горчит?<br><strong>Голос:</strong> Завариваешь кофе, а он получается горьким и плоским? Дело не в зерне.</td></tr>
+                        <tr class="border-b"><td class="py-3 text-gray-600">0:02-0:05. Средний план. Бариста показывает весы и термометр.</td><td class="py-3"><strong>Голос:</strong> Главная ошибка — заливать воронку крутым кипятком на глаз.</td></tr>
+                        <tr><td class="py-3 text-gray-600">0:05-0:10. Макро: идеальная струя воды из чайника с тонким носиком.</td><td class="py-3"><strong>Голос:</strong> Температура 92 градуса. Пропорция 1 к 15. Сохраняй инструкцию, чтобы завтра утром выпить лучшую чашку в своей жизни.</td></tr>
+                    </table>
+                </div>
+                <p class="text-sm text-gray-500 italic">Я расписываю каждый кадр, чтобы монтажер и оператор точно знали, какой результат нужен для удержания внимания.</p>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-200 flex justify-end">
+                <button onclick="closeModal('modal-1')" class="px-6 py-2 bg-ink text-white rounded-full text-sm hover:bg-gray-800 transition-colors">Закрыть кейс</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 (Остальные модалки по аналогии, сокращены для демонстрации) -->
+    <div id="modal-2" class="fixed inset-0 z-[100] bg-ink/90 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-cream rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-8 relative transform scale-95 transition-transform duration-300 shadow-2xl">
+            <button onclick="closeModal('modal-2')" class="absolute top-6 right-6 text-gray-500 hover:text-ink"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h3 class="text-3xl font-serif font-bold mb-4 pr-10">Экспертные статьи (Блог)</h3>
+            <div class="prose prose-coffee max-w-none text-gray-700">
+                <p>Пример структуры экспертного материала о способах обработки зерна.</p>
+                <div class="bg-white p-6 rounded-xl border border-gray-200 my-6">
+                    <p class="text-red-500 line-through mb-2">Было: Уникальный процесс мытой обработки делает вкус непревзойденным.</p>
+                    <p class="text-green-700 font-medium">Стало: При мытой обработке ягоду депульпируют и ферментируют в воде. Результат в чашке — чистый, чайный профиль с яркой кислотностью, без ферментных или землистых нот.</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-200 flex justify-end">
+                <button onclick="closeModal('modal-2')" class="px-6 py-2 bg-ink text-white rounded-full text-sm hover:bg-gray-800 transition-colors">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Заглушки для Modal 3 и 4 для полноты работы скрипта -->
+    <div id="modal-3" class="fixed inset-0 z-[100] bg-ink/90 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300"><div class="bg-cream rounded-2xl w-full max-w-lg p-8 relative shadow-2xl"><button onclick="closeModal('modal-3')" class="absolute top-4 right-4 text-gray-500"><i data-lucide="x"></i></button><h3 class="text-2xl font-serif font-bold mb-4">Карточки товаров</h3><p class="text-gray-600">Здесь можно разместить конкретные примеры вычитки карточек товаров (до/после).</p></div></div>
+    
+    <div id="modal-4" class="fixed inset-0 z-[100] bg-ink/90 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300"><div class="bg-cream rounded-2xl w-full max-w-lg p-8 relative shadow-2xl"><button onclick="closeModal('modal-4')" class="absolute top-4 right-4 text-gray-500"><i data-lucide="x"></i></button><h3 class="text-2xl font-serif font-bold mb-4">Email-рассылки</h3><p class="text-gray-600">Примеры структуры контентных воронок и дайджестов.</p></div></div>
+
+    <!-- Уведомление (Toast) -->
+    <div id="cv-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[150%] transition-transform duration-300 bg-ink text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 z-50">
+        <i data-lucide="check-circle-2" class="text-green-400 w-5 h-5"></i>
+        <span>Резюме будет отправлено вместе с откликом!</span>
+    </div>
+
+    <script>
+        // Инициализация иконок Lucide
+        lucide.createIcons();
+
+        // Анимация появления элементов при скролле
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Анимируем только один раз
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Эффект изменения Navbar при скролле
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('bg-cream/90', 'border-coffee/10');
+                navbar.classList.add('bg-white/95', 'border-transparent');
+            } else {
+                navbar.classList.remove('shadow-md', 'bg-white/95', 'border-transparent');
+                navbar.classList.add('bg-cream/90', 'border-coffee/10');
+            }
+        });
+
+        // Управление модальными окнами (вместо alert)
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            const content = modal.querySelector('div');
+            modal.classList.remove('hidden');
+            
+            // Небольшая задержка для плавного появления
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden'; // Блокируем скролл фона
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            const content = modal.querySelector('div');
+            
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            
+            // Ждем завершения анимации (300ms) перед скрытием
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Возвращаем скролл
+            }, 300);
+        }
+
+        // Закрытие модалки по клику вне контента
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('fixed')) {
+                const openModals = document.querySelectorAll('.fixed.z-\\[100\\]:not(.hidden)');
+                openModals.forEach(modal => closeModal(modal.id));
+            }
+        });
+    </script>
+</body>
+</html>
